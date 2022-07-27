@@ -7,7 +7,7 @@ def post():
     post_data = {
         'title': 'Selling an aquarium fish',
         'description': 'Guppi fish, really cute',
-        'author': 'Mike'
+        'owner': 'Mike'
     }
     response = requests.post(f'{HOST}/advertisements', json=post_data)
     print(response.json())
