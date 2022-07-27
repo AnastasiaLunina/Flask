@@ -1,0 +1,27 @@
+version: '3.9'
+
+networks:
+  dev_network:
+
+services:
+  db:
+    image: postgres:latest
+    hostname: '127.0.0.1'
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: advertisements_flask_db
+
+  app:
+    build:
+      context: .
+    environment:
+      PG_DSN: 'postgresql://user:password@localhost:5432/advertisements_flask_db'
+    ports:
+      - '8000:8000'
+    depends_on:
+      - db
+    volumes:
+      - ./app:/app
